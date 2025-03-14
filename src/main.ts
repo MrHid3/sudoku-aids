@@ -1,3 +1,3 @@
 import GameBoard from "./GameBoard";
 
-let app = new GameBoard();
+let app = new GameBoard("#app");

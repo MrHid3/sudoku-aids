@@ -1,0 +1,47 @@
+body{
+    background-color: rgb(240, 240, 240);
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.tile{
+    height: 50px;
+    width: 50px;
+    background-color: lightgray;
+    border: 1px solid black;
+    padding: 10px;
+    margin: 2px;
+    text-align: center;
+    font-size: 60px;
+    line-height: 60px;
+    color: darkgray;
+    transition-duration: 0.2s;
+}
+
+.tile:hover{
+    margin: 0;
+    height: 54px;
+    width: 54px;
+    border-radius: 5px;
+    color: white;
+    border-color: white;
+}
+
+.contrast{
+    background-color: lightblue;
+    color: cornflowerblue;
+}
+
+#app{
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.wrong{
+    background-color: lightcoral;
+    border: 1px solid red;
+    color: red;
+}
