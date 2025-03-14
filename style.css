@@ -30,6 +30,25 @@ body{
     border-color: white;
 }
 
+.arrow{
+    margin: 0 !important;
+    height: 54px !important;
+    width: 54px !important;
+    border-radius: 5px !important;
+    color: white !important;
+    border-color: white !important;
+}
+
+.nohover:hover{
+    height: 50px;
+    width: 50px;
+    margin: 2px;
+    color: darkgray;
+    border: 1px solid black;
+    transition-delay: 0.1s;
+    border-radius: 0;
+}
+
 .contrast{
     background-color: lightblue;
     color: cornflowerblue;
@@ -40,7 +59,13 @@ body{
     width: fit-content;
 }
 
-.wrong{
+.wrong {
+    background-color: lightcoral;
+    border: 1px solid red;
+    color: red;
+}
+
+.error{
     background-color: lightcoral;
     border: 1px solid red;
     color: red;

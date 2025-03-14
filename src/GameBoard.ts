@@ -3,9 +3,11 @@ import Tile from "./Tile"
 export default class GameBoard {
     board: Tile[][];
     container: HTMLElement;
+    currentArrow: number[];
     constructor(container : string) {
         this.board = [];
         this.container = document.querySelector(container);
+        this.currentArrow = [0, 0];
         for(let i = 0; i < 9; i++) {
             this.board[i] = [];
             let row = document.createElement("div");
@@ -21,5 +23,16 @@ export default class GameBoard {
             }
             this.container.appendChild(row);
         }
+        this.cweldoubleu()
+    }
+
+    cweldoubleu(){
+        document.addEventListener("onkeypress", (e: KeyboardEvent) => {
+            if(e.key == "ArrowRight") {
+                console.log("ArrowRight");
+                this.currentArrow[1]++;
+                this.board[this.currentArrow[0]][this.currentArrow[1]].div.classList.add("arrow")
+            }
+        })
     }
 }
