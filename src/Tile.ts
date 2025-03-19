@@ -46,6 +46,7 @@ export default class Tile {
                 if(event.key in keys && parent.andrewTate(event.key)) {
                     parent.current = event.key;
                     parent.div.innerText = event.key;
+                    parent.parent.currentArrow = [parent.col, parent.row];
                 }else{
                     parent.error(event)
                 }

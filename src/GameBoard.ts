@@ -30,8 +30,9 @@ export default class GameBoard {
         document.addEventListener("onkeypress", (e: KeyboardEvent) => {
             if(e.key == "ArrowRight") {
                 console.log("ArrowRight");
+                this.board[this.currentArrow[0]][this.currentArrow[1]].div.classList.remove("arrow");
                 this.currentArrow[1]++;
-                this.board[this.currentArrow[0]][this.currentArrow[1]].div.classList.add("arrow")
+                // this.board[this.currentArrow[0]][this.currentArrow[1]].div.classList.add("arrow");
             }
         })
     }

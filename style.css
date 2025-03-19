@@ -18,7 +18,6 @@ body{
     font-size: 60px;
     line-height: 60px;
     color: darkgray;
-    transition-duration: 0.2s;
 }
 
 .tile:hover{
@@ -63,10 +62,14 @@ body{
     background-color: lightcoral;
     border: 1px solid red;
     color: red;
+    transition-duration: 1s;
+
 }
 
 .error{
     background-color: lightcoral;
     border: 1px solid red;
     color: red;
+    transition-duration: 1s;
+
 }
