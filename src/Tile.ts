@@ -12,10 +12,13 @@ export default class Tile {
 
     constructor(correct: number, current: number, blocked: boolean, revealed: boolean, div: HTMLDivElement, row : number, col :number,
             parent : GameBoard) {
+        this.correct = correct;
         this.current = current;
         this.blocked = blocked;
         this.revealed = revealed;
         this.div = div;
+        if(this.revealed)
+            this.div.innerText = this.correct;
         this.row = row;
         this.col = col;
         this.parent = parent;
@@ -42,14 +45,24 @@ export default class Tile {
         this.div.addEventListener("mouseover", (event, parent = this) =>{
             const keys = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             function klucz(event){
-                parent.div.classList.add("nohover")
-                if(event.key in keys && parent.andrewTate(event.key)) {
+                parent.div.classList.add("nohover");
+                let isin = false;
+                keys.forEach(e => {
+                    if(e == event.key){
+                        isin = true;
+                    }})
+                if(event.key == "Backspace"){
+                    parent.div.innerText = "";
+                    parent.color();
+                }else if(isin && parent.andrewTate(event.key)) {
                     parent.current = event.key;
                     parent.div.innerText = event.key;
                     parent.parent.currentArrow = [parent.col, parent.row];
+                    parent.color();
                 }else{
                     parent.error(event)
                 }
+
                 document.removeEventListener("keydown", klucz)
             }
             document.addEventListener("keydown", klucz)
@@ -61,7 +74,6 @@ export default class Tile {
     }
 
     andrewTate(nt: number){
-
         for (let i = 0; i < 9; i++) {
             if (this.row == i)
                 continue;
@@ -85,5 +97,19 @@ export default class Tile {
             }
         }
         return true;
+    }
+
+    color(){
+        //@ts-ignore
+        if(this.div.innerText == this.correct){
+            this.div.classList.add("correct")
+            this.div.classList.remove("incorrect");
+        }else if (this.div.innerText != ""){
+            this.div.classList.add("incorrect");
+            this.div.classList.remove("correct")
+        }else{
+            this.div.classList.remove("incorrect");
+            this.div.classList.remove("correct");
+        }
     }
 }
