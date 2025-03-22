@@ -67,10 +67,25 @@ export default class GameBoard {
     solve(){
         this.board.forEach(row => {
             row.forEach(element => {
+                //@ts-ignore
                 element.div.innerText = element.correct;
                 element.div.classList.remove("correct");
                 element.div.classList.remove("incorrect");
             })
         })
     }
+
+    checkCorrect(){
+        let good = true;
+        this.board.forEach(row => {
+            row.forEach(element => {
+                if (element.correct != element.current){
+                    good = false;
+                }
+            })
+        })
+        if (good)
+            console.log("counter-terrorists win");
+    }
 }
+
