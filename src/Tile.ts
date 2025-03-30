@@ -55,7 +55,6 @@ export default class Tile {
                 }else if(isin) {
                     parent.current = event.key;
                     parent.div.innerText = event.key;
-                    parent.parent.currentArrow = [parent.col, parent.row];
                     parent.color();
                 }else{
                     parent.error(event)

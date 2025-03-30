@@ -3,25 +3,11 @@ import Tile from "./Tile"
 export default class GameBoard {
     board: Tile[][];
     container: HTMLElement;
-    currentArrow: number[];
     constructor(container : string, difficulty: string) {
         this.board = [];
         this.container = document.querySelector(container);
-        this.currentArrow = [0, 0];
 
         this.createBord(difficulty);
-        this.cweldoubleu()
-    }
-
-    cweldoubleu(){
-        document.addEventListener("onkeypress", (e: KeyboardEvent) => {
-            if(e.key == "ArrowRight") {
-                console.log("ArrowRight");
-                this.board[this.currentArrow[0]][this.currentArrow[1]].div.classList.remove("arrow");
-                this.currentArrow[1]++;
-                // this.board[this.currentArrow[0]][this.currentArrow[1]].div.classList.add("arrow");
-            }
-        })
     }
 
     async createBord(difficulty: string) {
@@ -69,6 +55,7 @@ export default class GameBoard {
             row.forEach(element => {
                 //@ts-ignore
                 element.div.innerText = element.correct;
+                element.current = element.correct;
                 element.div.classList.remove("correct");
                 element.div.classList.remove("incorrect");
             })
@@ -79,9 +66,8 @@ export default class GameBoard {
         let good = true;
         this.board.forEach(row => {
             row.forEach(element => {
-                if (element.correct != element.current){
+                if (element.correct != element.current)
                     good = false;
-                }
             })
         })
         if (good)
