@@ -71,7 +71,26 @@ export default class GameBoard {
             })
         })
         if (good)
-            console.log("counter-terrorists win");
+            this.win();
     }
+
+    win(){
+        let div = document.createElement("div");
+        div.classList.add("win");
+        div.innerText = "Wygrałeś!";
+        document.body.appendChild(div);
+        let x = document.createElement("button");
+        x.onclick = () => {
+            document.body.removeChild(div);
+        }
+        x.innerText = "Zamknij";
+        div.appendChild(x);
+        this.board.forEach(row => {
+            row.forEach(element => {
+                element.blocked = true;
+            })
+        })
+    }
+
 }
 

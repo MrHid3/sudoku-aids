@@ -108,6 +108,36 @@ button{
     color: #3a2626;
 }
 
+.win{
+    background-color: lightcoral;
+    border: 2px solid red;
+    border-radius: 5px;
+    display: block;
+    width: 500px;
+    height: 350px;
+    z-index: 0;
+    position: absolute;
+    top: calc(50% - 175px);
+    left: calc(50% - 250px);
+    text-align: center;
+    font-size: 70px;
+    line-height: 175px;
+    animation: blink 0.2s infinite;
+}
+
+button{
+    background-color: white;
+    border: 2px solid lightgray;
+    opacity: 80%;
+    border-radius: 15px;
+    transition-duration: 0.5s;
+    padding: 5px;
+}
+
+button:hover{
+    border: 2px solid darkgray;
+}
+
 @media only screen and (max-width: 850px) {
     body{
         flex-direction: column;
@@ -122,5 +152,20 @@ button{
         width: 5vw;
         height: 5vw;
         margin: 2px;
+    }
+}
+
+@keyframes blink{
+    0%{
+        color: white;
+    }
+    50%{
+    color: white;
+    }
+    51%{
+        color: black;
+    }
+    100%{
+        color: black;
     }
 }

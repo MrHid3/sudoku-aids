@@ -39,7 +39,10 @@ export default class Tile {
     }
 
     click(){
+
         this.div.addEventListener("mouseover", (event, parent = this) =>{
+            if(this.blocked)
+                return;
             const keys = [1, 2, 3, 4, 5, 6, 7, 8, 9]
             function klucz(event){
                 parent.div.classList.add("nohover");
