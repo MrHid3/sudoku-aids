@@ -17,3 +17,11 @@ buttons.forEach((button, i) => {
 document.querySelector(".solution").addEventListener("click", (e) => {
     app.solve();
 })
+
+document.getElementById("file").oninput = async (e) => {
+    app.delete();
+    app = new GameBoard("#app", "file");
+    const file = await e.target.files[0];
+    app.createBoardFromFile(JSON.parse(await file.text()))
+    return file;
+}

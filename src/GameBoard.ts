@@ -18,11 +18,35 @@ export default class GameBoard {
                 document.getElementById('timer').innerText = `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
             }
         }, 1000);
+
         this.createBord(difficulty);
         this.startTimer();
     }
 
+    createBoardFromFile(board: number[][]) {
+        for(let i = 0; i < 9; i++) {
+            this.board[i] = [];
+            let row = document.createElement("div");
+            row.classList.add("row");
+            for(let j = 0; j < 9; j++) {
+                let tile = document.createElement("div");
+                tile.classList.add("tile");
+                if((i < 3 || i > 5) && (j > 2 && j < 6) || (j < 3 || j > 5) && (i > 2 && i < 6)){
+                    tile.classList.add("contrast");
+                }
+                tile.classList.add(`row-${i}`);
+                tile.classList.add(`col-${j}`);
+                //@ts-ignore
+                this.board[i].push((new Tile(board[i][j], board[i][j], board[i][j] != 0, board[i][j] != 0, tile, i, j, this)));
+                row.appendChild(tile);
+            }
+            this.container.appendChild(row);
+        }
+    }
+
     async createBord(difficulty: string) {
+        if(difficulty == "file")
+            return
         let data = {};
         this.startTimer();
         //@ts-ignore
@@ -117,4 +141,6 @@ export default class GameBoard {
     stopTimer() {
         this.tick = false;
     }
+
+
 }
