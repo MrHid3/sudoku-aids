@@ -3,15 +3,28 @@ import Tile from "./Tile"
 export default class GameBoard {
     board: Tile[][];
     container: HTMLElement;
+    timer: any;
+    tick: boolean;
     constructor(container : string, difficulty: string) {
         this.board = [];
         this.container = document.querySelector(container);
-
+        this.tick = false;
+        let seconds = 0;
+        this.timer = setInterval((parent = this) => {
+            if(parent.tick){
+                seconds++;
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                document.getElementById('timer').innerText = `${minutes < 10 ? '0' : ''}${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+            }
+        }, 1000);
         this.createBord(difficulty);
+        this.startTimer();
     }
 
     async createBord(difficulty: string) {
         let data = {};
+        this.startTimer();
         //@ts-ignore
         while (await data.difficulty != difficulty) {
             //@ts-ignore
@@ -30,14 +43,17 @@ export default class GameBoard {
                 let tile = document.createElement("div");
                 tile.classList.add("tile");
                 if((i < 3 || i > 5) && (j > 2 && j < 6) || (j < 3 || j > 5) && (i > 2 && i < 6)){
-                    tile.classList.add("contrast")
+                    tile.classList.add("contrast");
                 }
+                tile.classList.add(`row-${i}`);
+                tile.classList.add(`col-${j}`);
                 //@ts-ignore
                 this.board[i].push((new Tile(data.solution[i][j], data.value[i][j], data.solution[i][j] == data.value[i][j], data.solution[i][j] == data.value[i][j], tile, i, j, this)));
                 row.appendChild(tile);
             }
             this.container.appendChild(row);
         }
+        this.startTimer();
         console.log(this.board);
         return data;
     }
@@ -76,8 +92,9 @@ export default class GameBoard {
 
     win(){
         let div = document.createElement("div");
+        this.stopTimer();
         div.classList.add("win");
-        div.innerText = "Wygrałeś!";
+        div.innerText = `Wygrałeś w ${document.getElementById("timer").innerText}`;
         document.body.appendChild(div);
         let x = document.createElement("button");
         x.onclick = () => {
@@ -92,5 +109,12 @@ export default class GameBoard {
         })
     }
 
-}
+    startTimer() {
+        document.getElementById('timer').innerText = "00:00";
+        this.tick = true;
+    }
 
+    stopTimer() {
+        this.tick = false;
+    }
+}
